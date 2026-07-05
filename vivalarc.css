@@ -302,3 +302,76 @@ button.button-startpage:after{
 button.button-startpage:active{
     background:none !important;
 }
+
+/* --- ZEN-INSPIRED PINNED GRID ICONS FOR VIVALARC (V3 - FIXED SPACING) --- */
+
+:root {
+    /* Set how many pinned icons you want in a row */
+    --pinned-column-count: 4; 
+}
+
+/* 1. Turn the tab container into a strict grid */
+#browser .tab-strip {
+    display: grid !important;
+    grid-template-columns: repeat(var(--pinned-column-count), minmax(0, 1fr)) !important;
+    grid-auto-rows: max-content !important; /* FIX: Prevent rows from stretching vertically */
+    align-content: start !important;        /* FIX: Pack all tabs tightly at the top */
+    gap: 5px !important;
+}
+
+/* 2. Remove Vivaldi's absolute positioning wrappers from the layout equation */
+#browser .tab-position {
+    display: contents !important;
+}
+
+/* 3. Strip any inline transforms or margins from wrappers injected by Vivaldi's JS */
+#browser .tab-wrapper,
+#browser .tab-strip > .separator,
+#browser .newtab {
+    position: relative !important;
+    transform: none !important;
+    margin: 0 !important;
+}
+
+/* 4. Normal tabs span the full width */
+#browser .tab-position:not(.is-pinned) > .tab-wrapper,
+#browser .tab-strip > .separator,
+#browser .newtab {
+    grid-column: 1 / -1 !important;
+    width: auto !important;
+}
+
+/* 5. Pinned tabs occupy 1 cell and form a square */
+#browser .tab-position.is-pinned > .tab-wrapper {
+    grid-column: span 1 !important;
+    aspect-ratio: 1 !important;
+    background-color: var(--colorAccentBgAlphaHeavy) !important;
+    align-self: start !important;
+}
+
+/* 6. Clean up the pinned tab internals to center the icon */
+#browser .tab-position.is-pinned .tab {
+    max-height: unset !important;
+    height: 100% !important;
+    align-items: center !important;
+    padding: 0 !important;
+}
+
+#browser .tab-position.is-pinned .tab-header {
+    flex: 1 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    justify-content: center !important;
+}
+
+/* Hide titles and close buttons for pinned tabs */
+#browser .tab-position.is-pinned .title,
+#browser .tab-position.is-pinned .close {
+    display: none !important;
+}
+
+/* Fix group indicator layout for stacked tabs */
+#browser .tab-position.is-pinned .tab-group-indicator {
+    grid-row: 1 / 2 !important;
+    column-gap: 2px !important;
+}
