@@ -15,7 +15,7 @@
 > During the setup process, you can search for keywords in the upper left corner of the "Settings" page to quickly locate
 
 **Must-haves** 
-- **Tabs** > Tab bar position > `Left`
+- **Tabs** > Tab bar position > `Vertical Left`
 - **Address Bar** > `Uncheck 'Show Address Bar'`
 - **Keyboard** (Set the necessary keyboard shortcuts)
     - Address Bar > `Command + B` (Remove Booksmarks shortcuts first in Windows)
